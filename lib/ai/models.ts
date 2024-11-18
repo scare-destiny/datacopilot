@@ -20,6 +20,12 @@ export const models: Array<Model> = [
 		apiIdentifier: 'gpt-4o',
 		description: 'For complex, multi-step tasks',
 	},
+	{
+		id: 'claude-3-sonnet',
+		label: 'Claude 3 sonnet',
+		apiIdentifier: 'claude-3-5-sonnet-20241022',
+		description: 'Claude 3 sonnet',
+	},
 ] as const
 
 export const DEFAULT_MODEL_NAME: string = 'gpt-4o-mini'
