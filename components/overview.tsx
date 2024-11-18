@@ -40,8 +40,8 @@ export const Overview = () => {
 					speaks human, not tech.
 				</p>
 				<p>
-					Get queries for any database, ask questions in plain English, and get
-					instant insights that drive you forward.
+					Stop relying on analysts and feel empowered yourself. Build queries in
+					plain English, and get instant insights that drive you forward.
 				</p>
 			</div>
 		</motion.div>
