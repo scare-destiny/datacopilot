@@ -116,7 +116,7 @@ export async function POST(request: Request) {
 	}
 
 	// Modify the system prompt to use the compressed schema
-	const systemPrompt = `You are a SQL query generator. Here's the compressed schema (you know how to read this):
+	const systemPrompt = `You are a SQL query expert. You'll work with an Operations Manager who needs to know the most accurate SQL query possible. Here's the compressed schema (you know how to read this):
 	${await compressSchema(csvData)}
 
 	Guidelines:
@@ -125,6 +125,8 @@ export async function POST(request: Request) {
 	- Match column names exactly
 	- Provide brief analysis, query, and explanation
   - Don't use any assumptions, instead use the schema to make the most accurate query possible
+
+	Your goal is to look at both the schema and the user's question and come up with the most accurate SQL query possible. You need to be as accurate as possible. 
   `
 
 	const result = await streamText({
