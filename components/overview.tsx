@@ -15,7 +15,22 @@ export const Overview = () => {
 		>
 			<div className='rounded-xl p-6 flex flex-col gap-8 leading-relaxed text-center max-w-xl'>
 				<p className='flex flex-row justify-center gap-4 items-center'>
-					<DataCopilotIcon size={46} />
+					<motion.div
+						animate={{
+							boxShadow: [
+								'0 0 10px rgba(59, 130, 246, 0.5)',
+								'0 0 20px rgba(59, 130, 246, 0.3)',
+								'0 0 10px rgba(59, 130, 246, 0.5)',
+							],
+						}}
+						transition={{
+							duration: 2,
+							repeat: Infinity,
+						}}
+						className='rounded-full'
+					>
+						<DataCopilotIcon size={46} />
+					</motion.div>
 					{/* <span>+</span>
 					<MessageIcon size={32} /> */}
 				</p>
@@ -26,7 +41,7 @@ export const Overview = () => {
 				</p>
 				<p>
 					Get queries for any database, ask questions in plain English, and get
-					instant insights that drive your business forward.
+					instant insights that drive you forward.
 				</p>
 			</div>
 		</motion.div>

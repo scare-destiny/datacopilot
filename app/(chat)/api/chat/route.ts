@@ -92,26 +92,49 @@ export async function POST(request: Request) {
 
 	const csvData = loadCsvData()
 
-	// Create a system prompt that includes information about the CSV data
-	const systemPrompt = `You are an AI assistant with access to a dataset containing the following information:
-  ${JSON.stringify(csvData)}
-  
-  When answering questions:
-  1. Reference this data to provide accurate information
-  2. If asked about specific numbers or statistics, use the exact values from the dataset
-  3. If the question cannot be answered using the available data, clearly state that
-  
-  The data structure and fields available are: ${Object.keys(csvData[0]).join(
-			', '
-		)}`
+	// First, compress the schema into a more compact form
+	const compressSchema = async (schema: any) => {
+		const compressionPrompt = `Compress the following schema in a way that you (GPT) can later reconstruct it perfectly. Use any symbols, abbreviations, or encodings that make sense to you. Make it as compact as possible:
+		${JSON.stringify(schema)}`
+
+		// Use your AI model to compress the schema
+		const { fullStream } = await streamText({
+			model: customModel(model.apiIdentifier),
+			prompt: compressionPrompt,
+			system: 'You are a schema compression expert. Be as concise as possible.',
+		})
+
+		// Collect the compressed result
+		let compressedSchema = ''
+		for await (const delta of fullStream) {
+			if (delta.type === 'text-delta') {
+				compressedSchema += delta.textDelta
+			}
+		}
+
+		return compressedSchema
+	}
+
+	// Modify the system prompt to use the compressed schema
+	const systemPrompt = `You are a SQL query generator. Here's the compressed schema (you know how to read this):
+	${await compressSchema(csvData)}
+
+	Guidelines:
+	- Use ClickHouse SQL syntax
+	- No semicolons at end
+	- Match column names exactly
+	- Provide brief analysis, query, and explanation
+  - Don't use any assumptions, instead use the schema to make the most accurate query possible
+  `
 
 	const result = await streamText({
 		model: customModel(model.apiIdentifier),
 		system: systemPrompt,
 		messages: coreMessages,
 		maxSteps: 5,
-		experimental_activeTools: allTools,
+		experimental_activeTools: allTools as never[],
 		tools: {
+			/*
 			getWeather: {
 				description: 'Get the current weather at a location',
 				parameters: z.object({
@@ -337,6 +360,7 @@ export async function POST(request: Request) {
 					}
 				},
 			},
+			*/
 		},
 		onFinish: async ({ responseMessages }) => {
 			if (session.user?.id) {
