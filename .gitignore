@@ -38,4 +38,5 @@ yarn-error.log*
 .env*.local
 
 # Instructions
-data
+data.csv
+mysql-stripe.csv
