@@ -27,7 +27,7 @@ const suggestedActions = [
 	{
 		title: 'What is the average matching time?',
 		label: 'for paid users?',
-		action: 'What is the weather in San Francisco?',
+		action: 'What is the average matching time??',
 	},
 	{
 		title: 'Which industry has the highest growth rate',
