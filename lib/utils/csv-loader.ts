@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import Papa from 'papaparse'
+import { parse } from 'papaparse'
 
 export function loadCsvData() {
 	// Read CSV file from your project
@@ -8,7 +8,7 @@ export function loadCsvData() {
 	const csvContent = fs.readFileSync(csvPath, 'utf-8')
 
 	// Parse CSV
-	const parsedData = Papa.parse(csvContent, {
+	const parsedData = parse(csvContent, {
 		header: true,
 		skipEmptyLines: true,
 	})

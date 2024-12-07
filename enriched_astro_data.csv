@@ -1,0 +1,34 @@
+Table_id;Table_Name;Table_Description;Field_Name;Field_Desc;Data_Type
+TBL_001;Event Logs Galaxy;This table contains records of various events and their details.;StarID;The main unique identifier for the records in this table;integer
+;;;ManifestedAt;This is the starting date as too when the galaxy was created;datetime
+;;;CelestialEvent;;string
+;;;WarpedAt;;datetime
+;;;EtherealEventGroup;;string
+;;;EtherealEventTitle;;string
+;;;EtherealEventResource;;string
+;;;EtherealProperties;;virtual_table
+TBL_002;Feedback Galaxy;This table contains feedback records and their associated details.;StarID;;integer
+;;;EtherealType;;integer
+;;;EtherealFeedback;;string
+;;;ManifestedAt;;datetime
+;;;WarpedAt;;datetime
+;;;EtherealSourceType;;string
+;;;EtherealProperties;;virtual_table
+TBL_003;Tasks Galaxy;This table contains task records and their associated details.;StarID;;integer
+;;;EtherealHash;;string
+;;;EtherealSlug;;string
+;;;EtherealTitle;;string
+;;;EtherealArchive;;integer
+;;;EtherealDeadline;;string
+;;;EtherealPriority;;integer
+;;;EtherealReviewed;;integer
+;;;EtherealLastView;;datetime
+;;;ManifestedAt;;datetime
+;;;WarpedAt;;datetime
+;;;EtherealDescription;;string
+;;;EtherealTestAssignment;;integer
+;;;EtherealMatchTimeMinutes;;integer
+;;;EtherealReviewSpecialisations;;json
+;;;EtherealSlackNotificationEnabled;;integer
+;;;EtherealIsSatisfactionRateIgnored;;integer
+;;;EtherealProperties;;virtual_table 
